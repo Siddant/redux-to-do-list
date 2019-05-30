@@ -1,0 +1,36 @@
+* {
+  font-family: 'Hevetica Neue', Arial, sans-serif;
+}
+
+main {
+  max-width: 988px;
+  margin: auto;
+}
+
+ol {
+  padding: 0 0 0 20px;
+
+  li {
+    padding: 5px 0;
+
+    &.completed {
+      text-decoration: line-through;
+      font-style: italic;
+      color: #666;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+form {
+  input, button {
+    padding: 5px 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+  }
+}
