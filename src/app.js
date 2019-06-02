@@ -1,17 +1,17 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-
 import './scss/style.scss'
 
 import TaskForm from './components/TaskForm'
 import Todos from './components/Todos'
 
-class App extends React.Component {
-  constructor(){
-    super()
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from './actions/index';
 
-    this.state ={
-      todos: [{ task: 'Make a todo app', completed: false}],
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
       newTask: ''
     }
 
@@ -20,41 +20,33 @@ class App extends React.Component {
     this.toggleCompleted = this.toggleCompleted.bind(this)
   }
 
-  handleChange(e){
+  handleChange(e) {
     this.setState({ newTask: e.target.value })
-    console.log(this.state.newTask)
   }
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault()
-    const task ={task: this.state.newTask, completed: false}
-    console.log(this.state.todos  ===  [...this.state.todos])
-    this.setState({todos: [...this.state.todos, task] , newTask: ''})
-
-
-    //this.state.todos.push(task)
+    const task = { task: this.state.newTask, completed: false }
+    this.props.increment(task)
+    this.setState({ newTask: '' })
   }
-  toggleCompleted(todo){
-    console.log(todo)
-    const index = this.state.todos.indexOf(todo)
-    const toogleTodo ={...todo, completed: !todo.completed}
 
-    const todos =[
-      ...this.state.todos.slice(0,index),
-      toogleTodo,
-      ...this.state.todos.slice(index+1)
-    ]
-    this.setState({ todos })
+
+  toggleCompleted(todo) {
+    this.props.toggleList(todo)
   }
-  remaningTodos(){
-    return this.state.todos.filter(todo => !todo.completed)
+
+
+  remaningTodos() {
+    return this.props.todos.filter(todo => !todo.completed)
   }
 
   render() {
     return (
+
       <main>
         <h1>You have {this.remaningTodos().length} thing(s) to do!</h1>
         <ol>
-          {this.state.todos.map((elemn,index) =>
+          {this.props.todos.map((elemn, index) =>
             <Todos
               key={index}
               {...elemn}
@@ -73,7 +65,16 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
+
+
+function mapStateToProps(state) {
+  return {
+    todos: state
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
