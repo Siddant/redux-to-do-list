@@ -1,80 +1,120 @@
-import React from 'react'
-import './scss/style.scss'
+import React from 'react';
+import './scss/style.scss';
 
-import TaskForm from './components/TaskForm'
-import Todos from './components/Todos'
+import TaskForm from './components/TaskForm';
+import Todos from './components/Todos';
 
 import { bindActionCreators } from 'redux';
+
 import { connect } from 'react-redux';
 import * as actionCreators from './actions/index';
 
 class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      newTask: ''
-    }
+	constructor() {
+		super();
+		this.state = {
+			newTask: ''
+		};
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.toggleCompleted = this.toggleCompleted.bind(this)
-  }
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.toggleCompleted = this.toggleCompleted.bind(this);
+		this.hanldeClick = this.hanldeClick.bind(this);
 
-  handleChange(e) {
-    this.setState({ newTask: e.target.value })
-  }
-  handleSubmit(e) {
-    e.preventDefault()
-    const task = { task: this.state.newTask, completed: false }
-    this.props.increment(task)
-    this.setState({ newTask: '' })
-  }
+		actionCreators.incrementStuff();
+	}
 
+	handleChange(e) {
+		this.setState({ newTask: e.target.value });
+	}
+	handleSubmit(e) {
+		e.preventDefault();
+		const task = { task: this.state.newTask, completed: false };
+		this.props.increment(task);
+		this.setState({ newTask: '' });
+	}
 
-  toggleCompleted(todo) {
-    this.props.toggleList(todo)
-  }
+	hanldeClick(e) {
+		console.log(actionCreators.actionOne);
+		this.props.actionOne('test', 1);
+		this.props.actionTwo('test1', 2);
+		this.props.actionThree();
+		// this.props.increment('2');
+		// this.props.teting('tetst');
+		// this.props.actionMapExample('lol');
+		// this.props.removeActionMapExample('testig');
+	}
 
+	toggleCompleted(todo) {
+		this.props.toggleList(todo);
+	}
 
-  remaningTodos() {
-    return this.props.todos.filter(todo => !todo.completed)
-  }
+	remaningTodos() {
+		return this.props.todos.filter((todo) => !todo.completed);
+	}
 
-  render() {
-    return (
+	render() {
+		return (
+			<main>
+				<h1>You have {this.remaningTodos().length} thing(s) to do!</h1>
+				<ol>
+					{this.props.todos.map((elemn, index) => (
+						<Todos
+							key={index}
+							{...elemn}
+							toggleCompleted={this.toggleCompleted}
+							onClick={() => this.toggleCompleted(elemn)}
+						/>
+					))}
+				</ol>
 
-      <main>
-        <h1>You have {this.remaningTodos().length} thing(s) to do!</h1>
-        <ol>
-          {this.props.todos.map((elemn, index) =>
-            <Todos
-              key={index}
-              {...elemn}
-              toggleCompleted={this.toggleCompleted}
-              onClick={() => this.toggleCompleted(elemn)}
-            />)}
-        </ol>
-
-        <TaskForm
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          newTask={this.state.newTask}
-        />
-      </main>
-    )
-  }
+				<TaskForm
+					handleChange={this.handleChange}
+					handleSubmit={this.handleSubmit}
+					newTask={this.state.newTask}
+				/>
+				<button onClick={this.hanldeClick}>Add</button>
+			</main>
+		);
+	}
 }
-
-
 
 function mapStateToProps(state) {
-  return {
-    todos: state
-  }
+	return {
+		todos: state.todos
+	};
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators(actionCreators, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+// const mapDispatchToProps = (dispatch) => {
+// 	return {
+// 		increment: (id) => dispatch(actionCreators.increment(id)),
+// 		teting: (id) => dispatch(actionCreators.teting(id)),
+// 		toggleList: (id) => dispatch(actionCreators.toggleList(id))
+// 	};
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+// 	return {
+// 		increment: (id) => dispatch(actionCreators.increment(id)),
+// 		teting: (id) => dispatch(actionCreators.teting(id)),
+// 		toggleList: (id) => dispatch(actionCreators.toggleList(id))
+// 	};
+// };
+
+const mapDispatchToProps = {
+	increment: actionCreators.increment,
+	teting: actionCreators.teting,
+	toggleList: actionCreators.toggleList,
+	actionMapExample: actionCreators.actionMapExample.addTodo,
+	removeActionMapExample: actionCreators.actionMapExample.removeTodo,
+	increment: actionCreators.actionCreatorsExample2.app.counter.increment,
+	actionOne: actionCreators.actionOne,
+	actionTwo: actionCreators.actionTwo,
+	actionThree: actionCreators.actionThree
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
