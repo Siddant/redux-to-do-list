@@ -12,8 +12,8 @@
     "url": "git+https://github.com/Siddant/redux-to-do-list.git"
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
-    "@babel/preset-env": "7.4.5",
+    "@babel/core": "7.5.5",
+    "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "7.0.0",
     "babel-loader": "8.0.6",
     "css-loader": "2.1.1",
