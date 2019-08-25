@@ -1,4 +1,4 @@
-import { handleAction } from 'redux-actions';
+import { handleAction, next } from 'redux-actions';
 
 let initState = 0;
 
@@ -11,12 +11,14 @@ const counterReducer = handleAction(
 	initState
 );
 
-// const counterReducer = handleActions(
-// 	{
-// 		['APP/COUNTER/INCREMENT'](state) {
-// 			return state + 1;
-// 		}
-// 	},
+// const counterReducer = handleAction(
+// 	'APP/COUNTER/INCREMENT',
+//     next() {
+//         return null;
+//       },
+//       throw(state, { payload: { message } }) {
+//         return message;
+//       },
 // 	initState
 // );
 

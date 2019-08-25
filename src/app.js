@@ -77,9 +77,6 @@ class App extends React.Component {
 					newTask={this.state.newTask}
 				/>
 				<button onClick={this.hanldeClick}>Add</button>
-				<button>Increment</button>
-				<button>Decrement</button>
-				<button>doStuff</button>
 			</main>
 		);
 	}
