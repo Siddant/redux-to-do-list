@@ -47,7 +47,7 @@ class App extends React.Component {
 		// this.props.removeActionMapExample('testig');
 		// this.props.incrementCounter(1);
 		// this.props.teting();
-		this.props.apiCall();
+		this.props.apiCall(this.state.newTask);
 	}
 
 	toggleCompleted(todo) {

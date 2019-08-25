@@ -87,22 +87,9 @@ export const { actionOne, actionTwo, actionThree } = createActions(
 	'ACTION_THREE'
 );
 
-// success
-
-// export const getTodoApi = () => (dispatch) => {
-// 	axios
-// 		.get(`https://jsonplaceholder.typicode.com/todos/1`)
-// 		.then((res) => {
-// 			dispatch(teting(res.data));
-// 		})
-// 		.catch((res) => dispatch(teting(res)));
-// };
-
-// eroor
-
-export const getTodoApi = () => (dispatch) => {
+export const getTodoApi = (value) => (dispatch) => {
 	axios
-		.get(`https://jsonplaceholder.typicode.com/tosdos/1`)
+		.get(`https://jsonplaceholder.typicode.com/todos/${value}`)
 		.then((res) => {
 			dispatch(teting(res.data));
 		})
