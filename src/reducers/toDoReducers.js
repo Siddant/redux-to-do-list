@@ -10,7 +10,7 @@ const todoReducer = (state = initState, action) => {
 			const toogleTodo = { ...action.payload, completed: !action.payload.completed };
 			return [ ...state.slice(0, index), toogleTodo, ...state.slice(index + 1) ];
 		case 'SIMPLE_ACTION':
-			console.log(action);
+			console.log('herer');
 			return state;
 		default:
 			return state;

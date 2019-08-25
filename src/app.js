@@ -23,6 +23,9 @@ class App extends React.Component {
 
 		actionCreators.incrementStuff();
 	}
+	componentDidMount() {
+		console.log(this.props.state);
+	}
 
 	handleChange(e) {
 		this.setState({ newTask: e.target.value });
@@ -35,14 +38,14 @@ class App extends React.Component {
 	}
 
 	hanldeClick(e) {
-		console.log(actionCreators.actionOne);
-		this.props.actionOne('test', 1);
-		this.props.actionTwo('test1', 2);
-		this.props.actionThree();
+		// this.props.actionOne('test', 1);
+		// this.props.actionTwo('test1', 2);
+		// this.props.actionThree();
 		// this.props.increment('2');
 		// this.props.teting('tetst');
 		// this.props.actionMapExample('lol');
 		// this.props.removeActionMapExample('testig');
+		this.props.incrementCounter(1);
 	}
 
 	toggleCompleted(todo) {
@@ -50,7 +53,7 @@ class App extends React.Component {
 	}
 
 	remaningTodos() {
-		return this.props.todos.filter((todo) => !todo.completed);
+		return this.props.state.filter((todo) => !todo.completed);
 	}
 
 	render() {
@@ -58,7 +61,7 @@ class App extends React.Component {
 			<main>
 				<h1>You have {this.remaningTodos().length} thing(s) to do!</h1>
 				<ol>
-					{this.props.todos.map((elemn, index) => (
+					{this.props.state.map((elemn, index) => (
 						<Todos
 							key={index}
 							{...elemn}
@@ -74,6 +77,9 @@ class App extends React.Component {
 					newTask={this.state.newTask}
 				/>
 				<button onClick={this.hanldeClick}>Add</button>
+				<button>Increment</button>
+				<button>Decrement</button>
+				<button>doStuff</button>
 			</main>
 		);
 	}
@@ -81,7 +87,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		todos: state.todos
+		state: state.todos
 	};
 }
 
@@ -111,7 +117,7 @@ const mapDispatchToProps = {
 	toggleList: actionCreators.toggleList,
 	actionMapExample: actionCreators.actionMapExample.addTodo,
 	removeActionMapExample: actionCreators.actionMapExample.removeTodo,
-	increment: actionCreators.actionCreatorsExample2.app.counter.increment,
+	incrementCounter: actionCreators.actionCreatorsExample2.app.counter.increment,
 	actionOne: actionCreators.actionOne,
 	actionTwo: actionCreators.actionTwo,
 	actionThree: actionCreators.actionThree
