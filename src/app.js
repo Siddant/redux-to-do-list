@@ -45,7 +45,9 @@ class App extends React.Component {
 		// this.props.teting('tetst');
 		// this.props.actionMapExample('lol');
 		// this.props.removeActionMapExample('testig');
-		this.props.incrementCounter(1);
+		// this.props.incrementCounter(1);
+		// this.props.teting();
+		this.props.apiCall();
 	}
 
 	toggleCompleted(todo) {
@@ -117,7 +119,8 @@ const mapDispatchToProps = {
 	incrementCounter: actionCreators.actionCreatorsExample2.app.counter.increment,
 	actionOne: actionCreators.actionOne,
 	actionTwo: actionCreators.actionTwo,
-	actionThree: actionCreators.actionThree
+	actionThree: actionCreators.actionThree,
+	apiCall: actionCreators.getTodoApi
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

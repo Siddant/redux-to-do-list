@@ -1,4 +1,5 @@
 import { createAction, createActions } from 'redux-actions';
+import axios from 'axios';
 
 // export function increment(lol) {
 // 	return {
@@ -35,7 +36,18 @@ import { createAction, createActions } from 'redux-actions';
 export const incrementStuff = createAction('INCREMENT');
 export const increment = createAction('increment_likes');
 export const toggleList = createAction('toggle_todo');
-export const teting = createAction('SIMPLE_ACTION', (test) => test, () => true);
+// export const teting = createAction('SIMPLE_ACTION', (test) => test, () => true);
+
+// export const teting = createAction(
+// 	'SIMPLE_ACTION',
+// 	() => {
+// 		return { task: 'err', completed: false };
+// 	},
+// 	() => true
+// );
+
+export const teting = createAction('SIMPLE_ACTION', (payload) => payload);
+
 // action map
 export const actionMapExample = createActions({
 	ADD_TODO: (todo) => ({ todo }), // payload creator
@@ -74,3 +86,25 @@ export const { actionOne, actionTwo, actionThree } = createActions(
 	},
 	'ACTION_THREE'
 );
+
+// success
+
+// export const getTodoApi = () => (dispatch) => {
+// 	axios
+// 		.get(`https://jsonplaceholder.typicode.com/todos/1`)
+// 		.then((res) => {
+// 			dispatch(teting(res.data));
+// 		})
+// 		.catch((res) => dispatch(teting(res)));
+// };
+
+// eroor
+
+export const getTodoApi = () => (dispatch) => {
+	axios
+		.get(`https://jsonplaceholder.typicode.com/tosdos/1`)
+		.then((res) => {
+			dispatch(teting(res.data));
+		})
+		.catch((res) => dispatch(teting(res)));
+};
