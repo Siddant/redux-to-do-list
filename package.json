@@ -12,18 +12,18 @@
     "url": "git+https://github.com/Siddant/redux-to-do-list.git"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
-    "css-loader": "^2.1.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "@babel/core": "7.4.5",
+    "@babel/preset-env": "7.4.5",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.6",
+    "css-loader": "2.1.1",
+    "html-webpack-plugin": "3.2.0",
+    "node-sass": "4.12.0",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.1",
+    "webpack": "4.32.2",
+    "webpack-cli": "3.3.2",
+    "webpack-dev-server": "3.4.1"
   },
   "dependencies": {
     "axios": "^0.19.0",
